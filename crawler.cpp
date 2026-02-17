@@ -52,7 +52,6 @@ int main(int argc, char *argv[]) {
 
     curl_easy_perform(curl);
 
-    curl_easy_cleanup(curl);
     //cout << myoutstring << endl;
 
     rapidjson::Document document;
@@ -105,7 +104,6 @@ int main(int argc, char *argv[]) {
             }
         }
         neighbors_visited.insert(neighbors_visited.end(), new_neighbors.begin(), new_neighbors.end());
-        curl_easy_cleanup(curl);
     }
 
 
