@@ -1,5 +1,5 @@
 LDFLAGS=-lcurl
-CXXFLAGS=-I ~/rapidjson/include -lcurl
+CXXFLAGS=-I ~/graphcrawler/rapidjson/include -lcurl
 LD=g++
 
 crawler: crawler.o
