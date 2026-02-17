@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     std::cout <<"Attempting push starting node to neighbors list..." << std::endl;
     neighbors_visited.push_back(argv[1]);
     std::cout << "Attempting iteration of neighbors for node " << argv[1] << std::endl;
-    for (SizeType i = 0; i < neighbors.Size(); i++) {
+    for (rapidjson::SizeType i = 0; i < neighbors.Size(); i++) {
         std::string neighbor_name = neighbors[i].GetString();
         neighbors_visited.push_back(neighbor_name);
         std::cout << "Visited neighbor: " << neighbors_visited[i] << std::endl;
