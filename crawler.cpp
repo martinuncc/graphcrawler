@@ -78,12 +78,20 @@ int main(int argc, char *argv[]) {
     }
 
     for (int i = 0; i < depth; i++) {
+        std::cout << "Current depth: " << i + 1 << std::endl;
+        std::cout << "Attempting creation of " << i << "th depth neighbors list..." << std::endl;
         std::vector<std::string> new_neighbors;
+        std::cout << "Attempting iteration of neighbors for depth " << i << std::endl;
         for (const auto& neighbor : neighbors_visited) {
+            std::cout << "Creating URL for neighbor: " << neighbor << std::endl;
             std::string url = baseURL + neighbor;
+            std::cout << "Attempting " << i << " th curleasysetopt " << url << std::endl;
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+            std::cout << "Attempting " << i << " th myoutstringclear " << neighbor << std::endl;
             myoutstring.clear();
+            std::cout << "Attempting " << i << " th curl_easy_perform for neighbor " << neighbor << std::endl;
             curl_easy_perform(curl);
+            std::cout << "Attempting " << i << " th document parse " << neighbor << std::endl;
             document.Parse(myoutstring.c_str());
             const rapidjson::Value& neighbors = document["neighbors"];
             if (!neighbors.IsNull()) {
@@ -97,6 +105,7 @@ int main(int argc, char *argv[]) {
             }
         }
         neighbors_visited.insert(neighbors_visited.end(), new_neighbors.begin(), new_neighbors.end());
+        curl_easy_cleanup(curl);
     }
 
 
