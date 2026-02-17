@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
         std::cout << "Visited neighbor: " << neighbors_visited[i] << std::endl;
     }
 
-    for (int i = 0; i < depth - 1; i++) {
+    for (int i = 0; i < depth; i++) {
         std::vector<std::string> new_neighbors;
         for (const auto& neighbor : neighbors_visited) {
             std::string url = baseURL + neighbor;
