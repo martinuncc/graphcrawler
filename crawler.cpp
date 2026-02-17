@@ -55,12 +55,12 @@ int main(int argc, char *argv[]) {
     curl_easy_cleanup(curl);
     //cout << myoutstring << endl;
 
-    Document document;
+    rapidjson::Document document;
     std::cout << "Parsing JSON response..." << std::endl;
     document.Parse(myoutstring.c_str());
 
     std::cout << "Creating neighbors list..." << std::endl;
-    const Value& neighbors = document["neighbors"];
+    const rapidjson::Value& neighbors = document["neighbors"];
     std::vector<std::string> neighbors_visited;
     std::cout << "Checking if neighbors exist for the starting node..." << std::endl;
     if (neighbors.IsNull()) {
