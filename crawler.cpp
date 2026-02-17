@@ -9,11 +9,6 @@
 
 using namespace std;
 
-#include "Bridges.h"
-#include "DataSource.h"
-#include "data_src/MovieActorWikidata.h"
-
-using namespace bridges;
 
 size_t my_write_data(char *ptr, size_t size, size_t nmemb, void *userdata) {
     std::string* mystring = (std::string*)userdata;
