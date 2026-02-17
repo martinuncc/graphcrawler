@@ -85,9 +85,9 @@ int main(int argc, char *argv[]) {
             myoutstring.clear();
             curl_easy_perform(curl);
             document.Parse(myoutstring.c_str());
-            const Value& neighbors = document["neighbors"];
+            const rapidjson::Value& neighbors = document["neighbors"];
             if (!neighbors.IsNull()) {
-                for (SizeType j = 0; j < neighbors.Size(); j++) {
+                for (rapidjson::SizeType j = 0; j < neighbors.Size(); j++) {
                     std::string neighbor_name = neighbors[j].GetString();
                     if (std::find(neighbors_visited.begin(), neighbors_visited.end(), neighbor_name) == neighbors_visited.end()) {
                         new_neighbors.push_back(neighbor_name);
