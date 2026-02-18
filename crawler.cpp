@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     if (res != CURLE_OK)
     {
         std::cerr << "curl failed: " << curl_easy_strerror(res) << std::endl;
-        continue;
+        return 0;
     }
 
     rapidjson::Document document;
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
             if (res != CURLE_OK)
             {
                 std::cerr << "curl failed: " << curl_easy_strerror(res) << std::endl;
-                continue;
+                return 0;
             }
             document.Parse(myoutstring.c_str());
             const rapidjson::Value &neighbors = document["neighbors"];
