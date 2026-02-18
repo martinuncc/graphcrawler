@@ -53,7 +53,8 @@ int main(int argc, char *argv[])
     std::string replacement_str = "%20";
     std::string baseURL = "http://hollywood-graph-crawler.bridgesuncc.org/neighbors/";
     size_t pos;
-    while ((pos = starting_node.find(char_to_replace)) != std::string::npos) {
+    while ((pos = starting_node.find(char_to_replace)) != std::string::npos)
+    {
         starting_node.replace(pos, 1, replacement_str);
     }
     std::string url = baseURL + starting_node;
@@ -67,7 +68,12 @@ int main(int argc, char *argv[])
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&myoutstring);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, my_write_data);
 
-    curl_easy_perform(curl);
+    CURLcode res = curl_easy_perform(curl);
+    if (res != CURLE_OK)
+    {
+        std::cerr << "curl failed: " << curl_easy_strerror(res) << std::endl;
+        continue;
+    }
 
     rapidjson::Document document;
     document.Parse(myoutstring.c_str());
@@ -94,13 +100,19 @@ int main(int argc, char *argv[])
         {
             size_t pos;
             std::string neighbor_copy = neighbor;
-            while ((pos = neighbor_copy.find(char_to_replace)) != std::string::npos) {
+            while ((pos = neighbor_copy.find(char_to_replace)) != std::string::npos)
+            {
                 neighbor_copy.replace(pos, 1, replacement_str);
             }
             std::string url = baseURL + neighbor_copy;
             curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
             myoutstring.clear();
-            curl_easy_perform(curl);
+            CURLcode res = curl_easy_perform(curl);
+            if (res != CURLE_OK)
+            {
+                std::cerr << "curl failed: " << curl_easy_strerror(res) << std::endl;
+                continue;
+            }
             document.Parse(myoutstring.c_str());
             const rapidjson::Value &neighbors = document["neighbors"];
             if (!neighbors.IsNull())
